@@ -1,16 +1,12 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 28px;
-  width: 92%;
-  margin: 0 auto;
-  align-items: center;
-  font-size: 24px;
-  line-height: 28px; 
+  margin: 45px auto 40px;
+  width: 70%;
+  border-bottom: 1px solid #545454;
 }
 
 @media (max-width: 425px) {
   .header {
-    padding-top: 16px;
+    margin: 28px auto 42px;
+    width: 100%;
   }
 }

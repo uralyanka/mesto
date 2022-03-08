@@ -1,0 +1,14 @@
+.profile__user-name {
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1.14;
+}
+
+@media (max-width: 462px) {
+    .profile__user-name {
+        font-size: 27px;
+        line-height: 1.2;
+    }
+}
