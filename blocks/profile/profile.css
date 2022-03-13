@@ -14,3 +14,10 @@
         margin: 36px auto 0;
     }
 }
+
+@media (max-width: 425px) {
+    .profile {
+        width: 90%;
+        margin: 0;
+    }
+}

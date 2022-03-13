@@ -1,11 +1,7 @@
 .elements__item-like {
    width: 22px;
    height: 19px; 
-   transition: opacity .4s ease;
+   border: none;
+   background-image: url(../../../images/mesto-elements__nolike.svg);
    margin: 30px;
-}
-
-.elements__item-like:hover {
-    opacity: 0.6;
-    cursor: pointer;
 }

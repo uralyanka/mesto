@@ -25,11 +25,11 @@
             <section class="profile">
                 <img src="./images/profile-avatar.jpg" alt="Аватар пользователя" class="profile__avatar">
                 <div class="profile__info">
-                    <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__user-name">Пришелец Альф</h1>
                     <button class="button profile__user-edit-button" type="button" aria-label="Редактировать профиль"></button>
-                    <p class="profile__user-bio">Исследователь океана</p>
+                    <p class="profile__user-bio">Порядочный обжора</p>
                 </div>
-                <button class="button profile__add-button" type="button" aria-label="Добавить место"></button>
+                <button class="button profile__add-button" type="button"></button>
             </section>
 
             <section class="elements">
@@ -38,42 +38,42 @@
                         <img src="https://cdn.pixabay.com/photo/2018/02/12/21/03/planet-3149121_960_720.jpg" alt="Луна" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Луна</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                     <li class="elements__item">
                         <img src="https://avatars.mds.yandex.net/get-zen_doc/1821029/pub_5eafa60434cbba0565c6b3f2_5eafdcae0ab5b766d08574d5/scale_1200" alt="Планета Мелмак" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Мой Мелмак</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                     <li class="elements__item">
                         <img src="https://cdn.pixabay.com/photo/2016/04/25/01/30/venus-1351056_960_720.png" alt="Планета Венера" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Венера</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                     <li class="elements__item">
                         <img src="https://cdn.pixabay.com/photo/2017/02/09/12/02/mars-2051747_960_720.png" alt="П" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Марс</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                     <li class="elements__item">
                         <img src="https://cdn.pixabay.com/photo/2020/09/08/23/58/mercury-5556108_960_720.jpg" alt="Меркурий" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Меркурий</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                     <li class="elements__item">
                         <img src="https://cdn.pixabay.com/photo/2012/01/09/10/41/space-probe-11616_960_720.jpg" alt="Планета Мелмак" class="elements__item-image">
                         <div class="elements__item-options">
                             <h2 class="elements__item-name">Юпитер</h2>
-                            <img src="./images/mesto-elements__like.svg" alt="Лайк" class="elements__item-like">
+                            <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
                         </div>
                     </li>
                 </ul>
@@ -84,6 +84,20 @@
         <footer class="footer">
             <p class="footer__text">© 2022 Mesto</p>
         </footer>
+
+        <section class="popup popup_user-edit popup_opened">
+            <div class="popup__overlay-edit-user"></div>
+            <form class="popup__form-edit-user">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <fieldset class="popup__container">
+                <input type="text" class="form__item form__item_el_heading" id="user-name" name="user-name" placeholder="Имя" required>
+                <input type="text" class="form__item form__item_el_subheading" id="user-bio" name="user-bio" placeholder="Коротко о себе" required>
+              </fieldset>
+            </form>
+            <button class="button profile__user-edit-button" type="button" aria-label="Сохранить изменения">Сохранить</button>
+            </div>
+        </section>
+
 
     </div>
 </body>

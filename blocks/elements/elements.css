@@ -1,18 +1,11 @@
 .elements {
-    margin: 51px auto;
+    margin: 50px auto 0;
     max-width: 70%;
-}
-
-@media (max-width: 768px) {
-    .elements {
-        margin: 88px auto;
-        max-width: 94%;
-    }
 }
 
 @media (max-width: 425px) {
     .elements {
-        margin: 64px auto;
+        margin: 36px auto;
         max-width: 90%;
     }
 }
