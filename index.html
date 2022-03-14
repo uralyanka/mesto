@@ -85,17 +85,17 @@
             <p class="footer__text">© 2022 Mesto</p>
         </footer>
 
-        <section class="popup popup_user-edit popup_opened">
-            <div class="popup__overlay-edit-user"></div>
-            <form class="popup__form-edit-user">
+        <section class="popup popup_user-edit">
+            <div class="popup__overlay popup__overlay_user-edit"></div>
+            <form class="popup__form popup__form_user-edit">
+            <button class="button popup__close-btn" type="button" aria-label="Закрыть форму"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <fieldset class="popup__container">
-                <input type="text" class="form__item form__item_el_heading" id="user-name" name="user-name" placeholder="Имя" required>
-                <input type="text" class="form__item form__item_el_subheading" id="user-bio" name="user-bio" placeholder="Коротко о себе" required>
+                <input type="text" placeholder="Имя" class="popup__input popup__input_type_user-name" id="user-name" name="user-name" data-minlength="2" data-message-required="Напишите ваше имя" data-message-minlength="Имя должно быть более 2х символов">
+                <input type="text" placeholder="Коротко о себе" class="popup__input popup__input_type_user-bio" id="user-bio" name="user-bio" required>
               </fieldset>
+              <button class="button popup__submit-btn" type="button" aria-label="Сохранить изменения">Сохранить</button>
             </form>
-            <button class="button profile__user-edit-button" type="button" aria-label="Сохранить изменения">Сохранить</button>
-            </div>
         </section>
 
 

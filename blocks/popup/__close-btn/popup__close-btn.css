@@ -1,0 +1,8 @@
+.popup__close-btn {
+    background-image: url(../../../images/mesto-popup-form__close.svg);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

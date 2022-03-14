@@ -1,0 +1,11 @@
+.popup__container {
+    border: none;
+    padding: 0;
+    margin: 54px auto 48px;
+}
+
+@media (max-width: 425px) {
+    .popup__container {
+        margin: 75px auto 45px;
+    }
+}
