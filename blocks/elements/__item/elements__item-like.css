@@ -1,0 +1,6 @@
+.elements__item-like {
+   min-width: 22px;
+   height: 19px; 
+   background: url(../../../images/mesto-elements__nolike.svg) no-repeat center / cover;
+   margin: 30px;
+}
