@@ -1,5 +1,5 @@
 let editUserButton = document.querySelector('.profile__user-edit-button');
-let closeEditUserButton = document.querySelector('.popup__close-btn');
+let closeEditUserButton = document.querySelector('.popup__close-btn_user-edit');
 let popupEditUser = document.querySelector('.popup_user-edit');
 
 let formElement = document.querySelector('.popup__form_user-edit');
@@ -21,9 +21,6 @@ function offPopup() {
     bioInput.value = '';
 }
 
-editUserButton.addEventListener('click', onPopup);
-closeEditUserButton.addEventListener('click', offPopup);
-
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
 
@@ -33,4 +30,8 @@ function formSubmitHandler (evt) {
     offPopup ();
 }
 
+editUserButton.addEventListener('click', onPopup);
+closeEditUserButton.addEventListener('click', offPopup);
+
 formElement.addEventListener('submit', formSubmitHandler); 
+
