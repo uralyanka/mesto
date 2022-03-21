@@ -85,14 +85,14 @@
             <p class="footer__text">© 2022 Mesto</p>
         </footer>
 
-        <section class="popup popup_user-edit"> <!-- Здравствуйте, Анна. Этот модификатор и ему подобные в попапе созданы для js. Я смотрела на примеры в тренажере и на советы в задании -->
+        <section class="popup popup_type_user-edit"> 
             <div class="popup__container">
                 <button class="button popup__close-btn popup__close-btn_user-edit" type="button" aria-label="Закрыть всплывающее окно"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form popup__form_user-edit" name="user-info">
+                <form class="popup__form" name="user-info">
                     <fieldset class="popup__input-container">
-                        <input type="text" placeholder="Имя" class="popup__input popup__input_type_user-name" id="user-name" name="user-name" required>
-                        <input type="text" placeholder="Коротко о себе" class="popup__input popup__input_type_user-bio" id="user-bio" name="user-bio" required>
+                        <input type="text" placeholder="Имя" class="popup__input" id="user-name" name="user-name" required>
+                        <input type="text" placeholder="Коротко о себе" class="popup__input" id="user-bio" name="user-bio" required>
                     </fieldset>
                     <button class="button popup__submit-btn popup__submit-btn_user-edit" type="submit" aria-label="Сохранить информацию">Сохранить</button>
                 </form>
