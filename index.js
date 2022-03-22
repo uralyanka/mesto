@@ -1,7 +1,7 @@
 let editUserButton = document.querySelector('.profile__user-edit-button');
-let closeEditUserButton = document.querySelector('.popup__close-btn_user-edit');
+let closeEditUserButton = document.querySelector('.popup__close-btn');
 
-let popupEditUser = document.querySelector('.popup_type_user-edit');
+let popupEditUser = document.querySelector('.popup_user-edit');
 let formElement = popupEditUser.querySelector('.popup__form');
 
 let nameInput = formElement.querySelector('#user-name');
