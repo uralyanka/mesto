@@ -1,11 +1,11 @@
 let editUserButton = document.querySelector('.profile__user-edit-button');
-let closeEditUserButton = document.querySelector('.popup__close-btn');
+let closeEditUserButton = document.querySelector('.popup__close-btn_type_user-edit');
 
-let popupEditUser = document.querySelector('.popup_user-edit');
-let formElement = popupEditUser.querySelector('.popup__form');
+let popupEditUser = document.querySelector('.popup_type_user-edit');
+let formElement = popupEditUser.querySelector('.popup__form_type_user-edit');
 
-let nameInput = formElement.querySelector('#user-name');
-let bioInput = formElement.querySelector('#user-bio');
+let nameInput = formElement.querySelector('.popup__input_type_user-name');
+let bioInput = formElement.querySelector('.popup__input_type_user-bio');
 
 let userName = document.querySelector('.profile__user-name');
 let userBio = document.querySelector('.profile__user-bio');
