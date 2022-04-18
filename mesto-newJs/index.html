@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ПР №4,5 Яны Евстегнеевой на Яндекс.Практикуме">
+    <meta name="keywords" content="html, css">
+    <meta name="author" content="Яна Евстегнеева">
+    <link rel="stylesheet" href="./pages/index.css">
+    <link type="image/x-icon" href="./images/favicon.ico" rel="shortcut icon">
+    <link type="Image/x-icon" href="./images/favicon.ico" rel="icon">
+    <title>Mesto Russia</title>
+</head>
+
+<body class="root">
+    <div class="page">
+
+        <header class="header">
+            <img src="./images/mesto-header__logo.svg" alt="Лого сайта" class="header__logo">
+        </header>
+
+        <main class="content">
+            
+            <section class="profile">
+                <img src="https://i.mr-7.ru/photos/2018/08/resize_UEgvK6l0UqS7YLVgQi5b.jpg" alt="Аватар пользователя" class="profile__avatar">
+                <div class="profile__info">
+                    <h1 class="profile__user-name">Пришелец Альф</h1>
+                    <button class="button profile__user-edit-button" type="button" aria-label="Редактировать информацию пользователя"></button>
+                    <p class="profile__user-bio">Порядочный обжора</p>
+                </div>
+                <button class="button profile__add-button" type="button" aria-label="Добавить место"></button>
+            </section>
+
+            <section class="elements">
+                <ul class="elements__items">
+
+                </ul>
+            </section>
+
+            <template id="mesto-template">
+                <li class="elements__item">
+                    <div class="elements__item-box">
+                        <img src="" alt="" class="elements__item-image">
+                        <button class="button elements__trash-btn" type="button" aria-label="Удалить место"></button>
+                    </div>
+                    <div class="elements__item-options">
+                        <h2 class="elements__item-name"></h2>
+                        <button class="button elements__item-like" type="button" aria-label="Лайк"></button>
+                    </div>
+                </li>
+            </template>
+
+        </main>
+
+        <footer class="footer">
+            <p class="footer__text">© 2022 Mesto</p>
+        </footer>
+
+        <section class="popup popup_type_user-edit"> 
+            <div class="popup__container">
+                <button class="button popup__close-btn popup__close-btn_type_user-edit" type="button" aria-label="Закрыть всплывающее окно"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__form popup__form_type_user-edit" name="user-info">
+                    <fieldset class="popup__input-container">
+                        <input type="text" placeholder="Имя" class="popup__input popup__input_type_user-name" id="user-name" name="user-name" required>
+                        <input type="text" placeholder="Коротко о себе" class="popup__input popup__input_type_user-bio" id="user-bio" name="user-bio" required>
+                    </fieldset>
+                    <button class="button popup__submit-btn popup__submit-btn_type_user-edit" type="submit" aria-label="Сохранить информацию">Сохранить</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup_type_add-mesto"> 
+            <div class="popup__container">
+                <button class="button popup__close-btn popup__close-btn_type_add-mesto" type="button" aria-label="Закрыть всплывающее окно"></button>
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form popup__form_type_add-mesto" name="user-info">
+                    <fieldset class="popup__input-container">
+                        <input type="text" placeholder="Название" class="popup__input popup__input_type_mesto-name" id="mesto-name" name="mesto-name" required>
+                        <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_mesto-link" id="mesto-link" name="mesto-link" required>
+                    </fieldset>
+                    <button class="button popup__submit-btn popup__submit-btn_type_add-mesto" type="submit" aria-label="Создать">Создать</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="popup popup_type_view-mesto"> 
+            <figure class="popup__figure"> 
+                <button class="button popup__close-btn popup__close-btn_type_view-mesto" type="button" aria-label="Закрыть всплывающее окно"></button>
+                    <img src="" alt="" class="popup__figure-image">
+                    <figcaption class="popup__figure-caption"></figcaption>
+                </figure>
+                </form>
+            </div>
+        </section>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
