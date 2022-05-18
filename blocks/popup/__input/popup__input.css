@@ -7,9 +7,9 @@
    line-height: 1.2;
    padding: 0 0 13px;
    box-sizing: border-box;
-   margin-bottom: 28px;
+   margin-top: 28px;
 }
 
-.popup__input:last-child {
-    margin-bottom: 0;
+.popup__input:first-child {
+    margin-top: 0;
 }
