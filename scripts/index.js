@@ -145,7 +145,7 @@ formElementAdd.addEventListener('submit', addElement);
 //ВАЛИДАЦИЯ
 
 const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector('.popup__input-error');
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   //`.${inputElement.id}-error` '.popup__input-error'
   inputElement.classList.add('popup__input_type_error');
   errorElement.textContent = errorMessage;
