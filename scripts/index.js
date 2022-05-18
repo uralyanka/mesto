@@ -137,23 +137,57 @@ btnCloseEditUser.addEventListener('click', () => closePopup(popupEditUser));
 //КНОПКА закрыть просмотр
 btnCloseImageElement.addEventListener('click', closeViewImageElement);
 //КНОПКА сохранить
-formElementEdit.addEventListener('submit', formSubmitHandler); 
+formElementEdit.addEventListener('submit', formSubmitHandler);
 //КНОПКА создать
 formElementAdd.addEventListener('submit', addElement); 
 
 
 //ВАЛИДАЦИЯ
 
+/*
+//Переменные
+const form = document.querySelector('.popup__form');
+const submit = document.querySelector('.popup__submit-btn');
+
+//Слушатели
+form.addEventListener('submit', handleSubmitForm);
+
+//Функции
+function validate(element) {
+  const errorElement = document.querySelector(`#error-${element.id}`);
+  if (!element.checkValidity()) {
+    errorElement.textContent = element.validationMessage;
+    activateError(errorElement);
+  }
+}
+
+function activateError(element) {
+  element.parentNode.classList.add('popup__input-container_invalid');
+}
+
+function handleSubmitForm(event) {
+  event.preventDefault();
+
+  const inputs = Array.from(form.elements);
+
+  inputs.forEach((element) => {
+    if (element.id !== submit.id) {
+      validate(element);
+    }
+  })
+}
+
+*/
+
 const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  //`.${inputElement.id}-error` '.popup__input-error'
+  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
   inputElement.classList.add('popup__input_type_error');
   errorElement.textContent = errorMessage;
   errorElement.classList.add('popup__input-error_active');
 };
 
 const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector('.popup__input-error');
+  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
   inputElement.classList.remove('popup__input_type_error');
   errorElement.classList.remove('popup__input-error_active');
   errorElement.textContent = '';
@@ -208,6 +242,7 @@ const enableValidation = () => {
   };
   
   enableValidation();
+
 
 /*
 enableValidation({
