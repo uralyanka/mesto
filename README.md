@@ -1,6 +1,6 @@
 # Проект: Место Russia
 
-* [ссылка на GitHub Pages](https://uralyanka.github.io/mesto/)
+:link: [проект на GitHub Pages](https://uralyanka.github.io/mesto/)
 
 ### Описание проекта
 
