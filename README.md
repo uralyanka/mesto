@@ -1,4 +1,4 @@
-# Проект: Место Russia
+# Проект: Место
 
 :link: [проект на GitHub Pages](https://uralyanka.github.io/mesto/)
 
@@ -12,8 +12,8 @@ Cтраница для размещения фотокарточек с коро
 
 ### Материалы
 
-* [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-* [Картинки из стока Pixabay](https://www.pixabay.com)
+:link: [Макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+:link: [Картинки из стока Pixabay](https://www.pixabay.com)
 
 ### Технологии
 
@@ -26,3 +26,5 @@ Cтраница для размещения фотокарточек с коро
 - Добавление видеокарточек
 - Свободное изменение сетки
 
+---
+Проект подготовлен в процессе обучения в [Яндекс.Практикуме](https://practicum.yandex.ru/)
