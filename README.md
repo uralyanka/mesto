@@ -17,7 +17,7 @@ Cтраница для размещения фотокарточек с коро
 
 :link: проект сверстан по [макету Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 
-:link: используются картинки [из стока Pixabay](https://www.pixabay.com)
+:link: используются картинки [из стока GoodFon.ru](https://www.goodfon.ru/)
 
 ### Технологии
 

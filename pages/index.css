@@ -22,8 +22,8 @@
 @import url(../blocks/elements/__item-options/elements__item-options.css);
 @import url(../blocks/elements/__item-image/elements__item-image.css);
 @import url(../blocks/elements/__item-name/elements__item-name.css);
-@import url(../blocks/elements/__item-like/elements__item-like.css);
-@import url(../blocks/elements/__item-like/_active/elements__item-like_active.css);
+@import url(../blocks/elements/__like-btn/elements__like-btn.css);
+@import url(../blocks/elements/__like-btn/_active/elements__like-btn_active.css);
 @import url(../blocks/elements/__item-box/elements__item-box.css);
 @import url(../blocks/elements/__trash-btn/elements__trash-btn.css);
 

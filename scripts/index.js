@@ -1,3 +1,33 @@
+//import {Card} from './сard.js';
+
+//Исходный массив (перенесла обратно, чтобы не путаться в файлах)
+const initialElements = [
+  {
+    name: 'Луна',
+    link: 'https://img3.goodfon.ru/original/1024x768/c/fc/kosmos-luna-nebo.jpg',
+  },
+  {
+    name: 'Моя планета Мелмак',
+    link: 'https://avatars.mds.yandex.net/get-zen_doc/1821029/pub_5eafa60434cbba0565c6b3f2_5eafdcae0ab5b766d08574d5/scale_1200',
+  },
+  {
+    name: 'Планета Венера',
+    link: 'https://img4.goodfon.ru/original/1280x800/7/71/venera-planeta-solnechnaia-sistema.jpg',
+  },
+  {
+    name: 'Планета Марс',
+    link: 'https://img5.goodfon.ru/original/1024x768/d/86/kosmos-planeta-mars.jpg',
+  },
+  {
+    name: 'Меркурий',
+    link: 'https://img5.goodfon.ru/original/1280x800/f/d5/vadim-sadovski-by-vadim-sadovski-space-system-of-sun.jpg',
+  },
+  {
+    name: 'Юпитер',
+    link: 'https://img5.goodfon.ru/original/1280x800/2/4e/kosmos-planeta-iupiter.jpg',
+  }
+];
+
 const elementsList = document.querySelector('.elements__items');
 const elementTemplate = document.querySelector('#element-template').content;
 
@@ -45,7 +75,6 @@ function closePopupByClickMouse(evt) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
-  //отдельное спасибо вам за это замечание! Этот случайный клик сильно смущал меня, но казалось, что это баг 80 лвл)))
   popup.removeEventListener('mousedown', closePopupByClickMouse);
 }
 
@@ -55,48 +84,108 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-//Функция для лайка
+
+/*/Функция для лайка
 function likeElement(evt) {
   const likeElement = evt.currentTarget;
-  likeElement.classList.toggle('elements__item-like_active');
+  likeElement.classList.toggle('elements__like-btn_active');
 };
 
 //Функция для удаления места
 function deleteElement(evt) {
   const deleteElement = evt.currentTarget.closest('.elements__item');
   deleteElement.remove();
-}
+}*/
 
 //Функция для просмотра места
-function viewImageElement(evt) {
+/*function viewImageElement(evt) {
   openPopup(popupViewImageElement);
   imageLink.src = evt.target.src;
   imageLink.alt = evt.target.alt;
   imageName.textContent = evt.target.alt;
-}
+} */
 
-//Функция для конца просмотра места :D
-function closeViewImageElement () {
-  closePopup(popupViewImageElement);
-};
+//Функция для просмотра места НОВАЯ
+function viewImageElement(name, link) {
+  openPopup(popupViewImageElement);
+  imageName.textContent = name;
+  imageLink.alt = name;
+  imageLink.src = link;
+} 
 
-//Функция создания нового места
+/*/Функция создания нового места
 function createElement(element) {
   const itemElement = elementTemplate.cloneNode(true);
   const elementImage = itemElement.querySelector('.elements__item-image');
-  elementImage.src = element.link;
   elementImage.alt = element.name;
+  elementImage.src = element.link;
   itemElement.querySelector('.elements__item-name').textContent = element.name;
   
-  itemElement.querySelector('.elements__item-like').addEventListener('click', likeElement);
+  itemElement.querySelector('.elements__like-btn').addEventListener('click', likeElement);
   itemElement.querySelector('.elements__trash-btn').addEventListener('click', deleteElement);
   elementImage.addEventListener('click', viewImageElement);
   
   return itemElement;
-};
+};*/
+
+class Card {
+  constructor(cardData, cardSelector, viewImageElement) {
+    this._name = cardData.name;
+    this._link = cardData.link;
+
+    this._cardSelector = cardSelector;
+    this._cardElement = this._getTemplate();
+
+    this._cardName = this._cardElement.querySelector('.elements__item-name');
+    this._cardImage = this._cardElement.querySelector('.elements__item-image');
+    this._likeCard  = this._cardElement.querySelector('.elements__like-btn');
+    this._deleteCard = this._cardElement.querySelector('.elements__trash-btn');
+
+    this._viewImageElement = viewImageElement;
+  }
+
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.elements__item')
+      .cloneNode(true);
+
+    return cardElement;
+  }
+
+  _setEventListeners() {
+    this._likeCard.addEventListener('click', () => {
+      this._likeCard.classList.toggle('elements__like-btn_active');
+    });
+
+    this._deleteCard.addEventListener('click', () => {
+      this._cardElement.remove();
+    });
+
+    this._cardImage.addEventListener('click', () => {
+      this._viewImageElement(this._name, this._link);
+    })
+  }
+
+  createElement() {
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardName.textContent = this._name;
+
+    this._setEventListeners();
+
+    return this._cardElement;
+  }
+}
+
+function createCard(cardData) {
+  const cardElement = new Card(cardData, '#element-template', viewImageElement);
+  return cardElement.createElement();
+}
 
 function renderElement(element) {
-  elementsList.prepend(createElement(element));
+  elementsList.prepend(createCard(element));
 }
 
 //Добавление массива на страницу
