@@ -1,6 +1,6 @@
-//import {Card} from './сard.js';
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
-//Исходный массив (перенесла обратно, чтобы не путаться в файлах)
 const initialElements = [
   {
     name: 'Луна',
@@ -29,7 +29,6 @@ const initialElements = [
 ];
 
 const elementsList = document.querySelector('.elements__items');
-const elementTemplate = document.querySelector('#element-template').content;
 
 const popupViewImageElement = document.querySelector('.popup_type_view-mesto');
 const imageLink = document.querySelector('.popup__figure-image');
@@ -50,6 +49,8 @@ const nameImageInput = formElementAdd.querySelector('.popup__input_type_mesto-na
 const linkImageInput = formElementAdd.querySelector('.popup__input_type_mesto-link');
 
 const closeButtons = document.querySelectorAll('.popup__close-btn');
+
+const formList = Array.from(document.querySelectorAll('.popup__form'));
 
 //Функция открытия попапов
 function openPopup(popup) {
@@ -84,27 +85,6 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-
-/*/Функция для лайка
-function likeElement(evt) {
-  const likeElement = evt.currentTarget;
-  likeElement.classList.toggle('elements__like-btn_active');
-};
-
-//Функция для удаления места
-function deleteElement(evt) {
-  const deleteElement = evt.currentTarget.closest('.elements__item');
-  deleteElement.remove();
-}*/
-
-//Функция для просмотра места
-/*function viewImageElement(evt) {
-  openPopup(popupViewImageElement);
-  imageLink.src = evt.target.src;
-  imageLink.alt = evt.target.alt;
-  imageName.textContent = evt.target.alt;
-} */
-
 //Функция для просмотра места НОВАЯ
 function viewImageElement(name, link) {
   openPopup(popupViewImageElement);
@@ -113,79 +93,14 @@ function viewImageElement(name, link) {
   imageLink.src = link;
 } 
 
-/*/Функция создания нового места
-function createElement(element) {
-  const itemElement = elementTemplate.cloneNode(true);
-  const elementImage = itemElement.querySelector('.elements__item-image');
-  elementImage.alt = element.name;
-  elementImage.src = element.link;
-  itemElement.querySelector('.elements__item-name').textContent = element.name;
-  
-  itemElement.querySelector('.elements__like-btn').addEventListener('click', likeElement);
-  itemElement.querySelector('.elements__trash-btn').addEventListener('click', deleteElement);
-  elementImage.addEventListener('click', viewImageElement);
-  
-  return itemElement;
-};*/
-
-class Card {
-  constructor(cardData, cardSelector, viewImageElement) {
-    this._name = cardData.name;
-    this._link = cardData.link;
-
-    this._cardSelector = cardSelector;
-    this._cardElement = this._getTemplate();
-
-    this._cardName = this._cardElement.querySelector('.elements__item-name');
-    this._cardImage = this._cardElement.querySelector('.elements__item-image');
-    this._likeCard  = this._cardElement.querySelector('.elements__like-btn');
-    this._deleteCard = this._cardElement.querySelector('.elements__trash-btn');
-
-    this._viewImageElement = viewImageElement;
-  }
-
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.elements__item')
-      .cloneNode(true);
-
-    return cardElement;
-  }
-
-  _setEventListeners() {
-    this._likeCard.addEventListener('click', () => {
-      this._likeCard.classList.toggle('elements__like-btn_active');
-    });
-
-    this._deleteCard.addEventListener('click', () => {
-      this._cardElement.remove();
-    });
-
-    this._cardImage.addEventListener('click', () => {
-      this._viewImageElement(this._name, this._link);
-    })
-  }
-
-  createElement() {
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
-    this._cardName.textContent = this._name;
-
-    this._setEventListeners();
-
-    return this._cardElement;
-  }
-}
-
-function createCard(cardData) {
+//обработка Card
+function createElement(cardData) {
   const cardElement = new Card(cardData, '#element-template', viewImageElement);
-  return cardElement.createElement();
+  return cardElement.createCard();
 }
 
 function renderElement(element) {
-  elementsList.prepend(createCard(element));
+  elementsList.prepend(createElement(element));
 }
 
 //Добавление массива на страницу
@@ -235,3 +150,19 @@ btnEditUser.addEventListener('click', function () {
 formElementEdit.addEventListener('submit', saveUserProfile);
 //КНОПКА создать
 formElementAdd.addEventListener('submit', addElement); 
+
+//данные для ВАЛИДАЦИИ
+const formData = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+//активация ВАЛИДАЦИИ
+formList.forEach((form) => {
+const formValidation = new FormValidator(formData, form);
+formValidation.enableValidation();
+});
