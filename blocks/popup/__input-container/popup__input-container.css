@@ -1,7 +1,7 @@
 .popup__input-container {
     border: none;
     padding: 0;
-    margin: 54px auto 1px;
+    margin: 54px auto 13px;
 }
 
 @media (max-width: 425px) {
