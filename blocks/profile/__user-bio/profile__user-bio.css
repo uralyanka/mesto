@@ -10,7 +10,7 @@
     max-width: 300px;
 }
 
-@media (max-width: 462px) {
+@media (max-width: 408px) {
     .profile__user-bio {
         font-size: 14px;
         max-width: 200px;

@@ -50,7 +50,17 @@ const linkImageInput = formElementAdd.querySelector('.popup__input_type_mesto-li
 
 const closeButtons = document.querySelectorAll('.popup__close-btn');
 
-const formList = Array.from(document.querySelectorAll('.popup__form'));
+const formData = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+const profileValidation = new FormValidator(formData, formElementEdit);
+const newCardValidation = new FormValidator(formData, formElementAdd);
 
 //Функция открытия попапов
 function openPopup(popup) {
@@ -85,7 +95,7 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => closePopup(popup));
 });
 
-//Функция для просмотра места НОВАЯ
+//Функция для просмотра места
 function viewImageElement(name, link) {
   openPopup(popupViewImageElement);
   imageName.textContent = name;
@@ -112,13 +122,7 @@ function saveUserProfile (evt) {
   userName.textContent = nameUserInput.value;
   userBio.textContent = bioUserInput.value;
   closePopup(popupEditUser);
-}
-
-//Функция деактивации сабмита
-function disabledSubmitBtn(popup) {
-  const btnBtn = popup.querySelector('.popup__submit-btn');
-  btnBtn.classList.add('popup__submit-btn_inactive');
-  btnBtn.disabled = "disabled";
+  profileValidation.toggleButtonState();
 }
 
 //Функция добавления в +
@@ -131,7 +135,7 @@ function addElement(evt) {
   renderElement(element);
   evt.target.reset();
   closePopup(popupAddElement);
-  disabledSubmitBtn(popupAddElement);
+  newCardValidation.toggleButtonState();
 }
 
 //КНОПКА +
@@ -151,18 +155,6 @@ formElementEdit.addEventListener('submit', saveUserProfile);
 //КНОПКА создать
 formElementAdd.addEventListener('submit', addElement); 
 
-//данные для ВАЛИДАЦИИ
-const formData = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_inactive',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-};
-
 //активация ВАЛИДАЦИИ
-formList.forEach((form) => {
-const formValidation = new FormValidator(formData, form);
-formValidation.enableValidation();
-});
+profileValidation.enableValidation();
+newCardValidation.enableValidation(); 
