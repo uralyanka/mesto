@@ -1,38 +1,8 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-
-const initialElements = [
-  {
-    name: 'Луна',
-    link: 'https://img3.goodfon.ru/original/1024x768/c/fc/kosmos-luna-nebo.jpg',
-  },
-  {
-    name: 'Моя планета Мелмак',
-    link: 'https://avatars.mds.yandex.net/get-zen_doc/1821029/pub_5eafa60434cbba0565c6b3f2_5eafdcae0ab5b766d08574d5/scale_1200',
-  },
-  {
-    name: 'Планета Венера',
-    link: 'https://img4.goodfon.ru/original/1280x800/7/71/venera-planeta-solnechnaia-sistema.jpg',
-  },
-  {
-    name: 'Планета Марс',
-    link: 'https://img5.goodfon.ru/original/1024x768/d/86/kosmos-planeta-mars.jpg',
-  },
-  {
-    name: 'Меркурий',
-    link: 'https://img5.goodfon.ru/original/1280x800/f/d5/vadim-sadovski-by-vadim-sadovski-space-system-of-sun.jpg',
-  },
-  {
-    name: 'Юпитер',
-    link: 'https://img5.goodfon.ru/original/1280x800/2/4e/kosmos-planeta-iupiter.jpg',
-  }
-];
-
-const elementsList = document.querySelector('.elements__items');
-
-const popupViewImageElement = document.querySelector('.popup_type_view-mesto');
-const imageLink = document.querySelector('.popup__figure-image');
-const imageName = document.querySelector('.popup__figure-caption');
+import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
+import { initialElements } from '../utils/constants.js';
 
 const btnEditUser = document.querySelector('.profile__user-edit-button');
 const popupEditUser = document.querySelector('.popup_type_user-edit');
@@ -93,28 +63,33 @@ function closePopup(popup) {
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
-});
-
-//Функция для просмотра места
-function viewImageElement(name, link) {
-  openPopup(popupViewImageElement);
-  imageName.textContent = name;
-  imageLink.alt = name;
-  imageLink.src = link;
-} 
+}); 
 
 //обработка Card
 function createElement(cardData) {
-  const cardElement = new Card(cardData, '#element-template', viewImageElement);
+  const cardElement = new Card(cardData, '#element-template', () => {
+    imagePopup.openPopup(cardData.name, cardData.link)
+  });
   return cardElement.createCard();
 }
 
-function renderElement(element) {
-  elementsList.prepend(createElement(element));
-}
+//Рендер массива через обработку Section 
+const cardList = new Section(
+  {
+  items: initialElements,
+  renderer: (item) => {
+    const cardElement = createElement(item);
+    cardList.addItem(cardElement);
+    }
+  },
+    '.elements__items'
+);
 
-//Добавление массива на страницу
-initialElements.reverse().forEach(renderElement);
+cardList.renderItems();
+
+//Открытие попапа с картинкой через PopupWithImage 
+const imagePopup = new PopupWithImage('.popup_type_view-mesto');
+imagePopup.setEventListeners();
 
 //Функция сохранения в карандаше
 function saveUserProfile (evt) {
@@ -128,11 +103,14 @@ function saveUserProfile (evt) {
 //Функция добавления в +
 function addElement(evt) {
   evt.preventDefault();
-  const element = {};
-  element.name = nameImageInput.value;
-  element.alt = nameImageInput.value;
-  element.link = linkImageInput.value;
-  renderElement(element);
+
+  const cardElement = createElement({
+    name: nameImageInput.value,
+    alt: nameImageInput.value,
+    link: linkImageInput.value
+  })
+  cardList.addItem(cardElement);
+
   evt.target.reset();
   closePopup(popupAddElement);
   newCardValidation.toggleButtonState();
