@@ -53,7 +53,6 @@ const handleProfileFormSubmit= (data) => {
   const { name, bio } = data
   userInfo.setUserInfo(name, bio)
   editUserPopup.closePopup()
-  profileValidation.toggleButtonState()
 }
 
 //Submit добавления карточки
@@ -66,7 +65,6 @@ const handleCardFormSubmit = (data) => {
 
   cardList.addItem(cardElement)
   addCardPopup.closePopup()
-  newCardValidation.toggleButtonState()
 }
 
 const imagePopup = new PopupWithImage('.popup_type_view-mesto');
@@ -80,6 +78,7 @@ addCardPopup.setEventListeners();
 
 //Открытие попапа редактирования профиля
 btnAddElement.addEventListener('click', () => {
+  newCardValidation.resetValidation()
   addCardPopup.openPopup()
 });
 
@@ -88,6 +87,8 @@ btnEditUser.addEventListener('click', () => {
   const { name, bio } = userInfo.getUserInfo()
   nameUserInput.value = name
   bioUserInput.value = bio
+
+  profileValidation.resetValidation()
   editUserPopup.openPopup()
 });
 
