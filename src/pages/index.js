@@ -1,5 +1,6 @@
 import './index.css';
 
+import Api from '../components/Api';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -27,6 +28,14 @@ const formData = {
 
 const profileValidation = new FormValidator(formData, formElementEdit);
 const newCardValidation = new FormValidator(formData, formElementAdd);
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
+  headers: {
+    authorization: '552f6cf5-9624-4487-82c3-a3748eda88d5',
+    'Content-Type': 'application/json',
+  }
+});
 
 //Создание карточки by Card
 function createElement(cardData) {
