@@ -48,7 +48,7 @@ export default class Api {
             link
           })
         }).then(res => this._checkRes(res));
-      }
+    }
 
     deleteCard(cardId) {
         return fetch(`${this._baseUrl/cardId}`, {
@@ -58,26 +58,33 @@ export default class Api {
     }
 
     addLike(cardId) {
-        return fetch(`${this._cardsUrl/cardId/likes}`, {
+        return fetch(`${this._cardsUrl/cardId}/likes`, {
           method: 'PUT',
           headers: this._headers
         }).then(res => this._checkRes(res));
     }
 
     deleteLike(cardId) {
-        return fetch(`${this._cardsUrl/cardId/likes}`, {
+        return fetch(`${this._cardsUrl/cardId}/likes`, {
           method: 'DELETE',
           headers: this._headers
         }).then(res => this._checkRes(res));
     }
 
-   updateAvatar(avatar) {
-        return fetch(`${this._userUrl/avatar}`, {
-            method: 'PATCH',
-            headers: this._headers,
-            body: JSON.stringify({
-              avatar
-            })
+    updateAvatar(avatar) {
+        return fetch(`${this._userUrl}/avatar`, {
+          method: 'PATCH',
+          headers: this._headers,
+          body: JSON.stringify({
+            avatar
+          })
         }).then(res => this._checkRes(res));
-      }
+    }
 }
+
+
+/*.then((res) => {
+          return res.json(); // В консоли окажется объект ответа от сервера
+        }).then((res) => {
+          console.log(res); // В консоли окажется объект ответа от сервера
+        });*/
