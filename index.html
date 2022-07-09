@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Mesto Project for Yandex.Practicum">
     <meta name="keywords" content="html, css">
     <meta name="author" content="Yana Evstegneeva">
-    <link rel="stylesheet" href="./pages/index.css">
-    <link type="image/x-icon" href="./images/favicon.ico" rel="shortcut icon">
-    <link type="Image/x-icon" href="./images/favicon.ico" rel="icon">
+    <link type="Image/x-icon" href="<%=require('./images/favicon.ico')%>" rel="icon">
     <title>Mesto Russia</title>
 </head>
-
 <body class="root">
     <div class="page">
-
         <header class="header">
-            <img src="./images/mesto-header__logo.svg" alt="Лого сайта" class="header__logo">
+            <img src="<%=require('./images/mesto-header__logo.svg')%>" alt="Лого сайта" class="header__logo">
         </header>
 
         <main class="content">
-            
             <section class="profile">
-                <img src="https://i.mr-7.ru/photos/2018/08/resize_UEgvK6l0UqS7YLVgQi5b.jpg" alt="Аватар пользователя" class="profile__avatar">
+                <div class="profile__avatar">
+                <img src="https://i.mr-7.ru/photos/2018/08/resize_UEgvK6l0UqS7YLVgQi5b.jpg" alt="Аватар пользователя" class="profile__avatar-image"></div>
                 <div class="profile__info">
                     <h1 class="profile__user-name">Пришелец Альф</h1>
                     <button class="button profile__user-edit-button" type="button" aria-label="Редактировать информацию пользователя"></button>
@@ -46,11 +41,13 @@
                     </div>
                     <div class="elements__item-options">
                         <h2 class="elements__item-name"></h2>
-                        <button class="button elements__like-btn" type="button" aria-label="Лайк"></button>
+                        <div class="elements__like">
+                            <button class="button elements__like-btn" type="button" aria-label="Лайк"></button>
+                            <span class="elements__like-counter">0</span>
+                        </div>
                     </div>
                 </li>
             </template>
-
         </main>
 
         <footer class="footer">
@@ -106,9 +103,37 @@
                     <figcaption class="popup__figure-caption"></figcaption>
             </figure>
         </section>
+
+        <section class="popup popup_type_delete-card-confirm"> 
+            <div class="popup__container popup__container_type_confirmation">
+                <button class="button popup__close-btn popup__close-btn_type_delete-card-confirm" type="button" aria-label="Закрыть всплывающее окно"></button>
+                <h2 class="popup__title">Вы уверены?</h2>
+
+                <form class="form" name="delete-card" novalidate>
+                    <input type="hidden" name="item-id" value="">
+                    <button class="button popup__submit-btn" type="submit" aria-label="Подтвердить удаление карточки">Да</button>
+                </form>
+
+            </div>
+        </section>
+
+        <section class="popup popup_type_update-avatar"> 
+            <div class="popup__container">
+                <button class="button popup__close-btn popup__close-btn_type_update-avatar" type="button" aria-label="Закрыть всплывающее окно"></button>
+                <h2 class="popup__title">Обновить аватар</h2>
+                <form class="popup__form popup__form_type_update-avatar" novalidate>
+                    <fieldset class="popup__input-container">
+
+                        <input id="avatar-link" name="avatar-link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_avatar-link" required type="url">
+
+                        <span id="error-avatar-link" class="popup__input-error avatar-link-input-error"></span>
+
+                    </fieldset>
+                    <button class="button popup__submit-btn popup__submit-btn_type_update-avatar" type="submit" aria-label="Создать">Сохранить</button>
+                </form>
+            </div>
+        </section>
         
     </div>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
-
 </html>
