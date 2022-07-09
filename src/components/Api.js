@@ -48,7 +48,7 @@ export default class Api {
     }
 
     deleteCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return fetch(this._cardsUrl + `/${cardId}`, {
           method: 'DELETE',
           headers: this._headers,
         }).then(res => this._checkRes(res));
@@ -56,12 +56,12 @@ export default class Api {
 
     likeSwitcher(cardId, isLiked) {
       if (isLiked) {
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        return fetch(this._cardsUrl + `/${cardId}/likes`, {
           method: 'DELETE',
           headers: this._headers,
         }).then(res => this._checkRes(res));
       } else {
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        return fetch(this._cardsUrl + `/${cardId}/likes`, {
           method: 'PUT',
           headers: this._headers,
         }).then(res => this._checkRes(res));
@@ -69,13 +69,13 @@ export default class Api {
     }
 
     updateAvatar(avatar) {
-        return fetch(`${this._userUrl}/avatar`, {
-          method: 'PATCH',
-          headers: this._headers,
-          body: JSON.stringify({
-            avatar
-          })
-        }).then(res => this._checkRes(res));
+      return fetch(`${this._userUrl}/avatar`, {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar
+        })
+      }).then(res => this._checkRes(res));
     }
 }
 

@@ -29,9 +29,9 @@ const formData = {
   errorClass: 'popup__input-error_active'
 };
 
-const profileValidation = new FormValidator(formData, formElementEdit);
-const newCardValidation = new FormValidator(formData, formElementAdd);
-const upAvatarValidation = new FormValidator(formData, formElementAvatar);
+const profileValidation = new FormValidator(formData, formElementEdit)
+const newCardValidation = new FormValidator(formData, formElementAdd)
+const upAvatarValidation = new FormValidator(formData, formElementAvatar)
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
@@ -41,40 +41,49 @@ const api = new Api({
   }
 });
 
-let userId = null;
+let userId = null
 
-//Создание карточки классом Card
+//Создание карточки
 function createElement(cardData) {
-  const cardElement = new Card(cardData, '#element-template', userId, viewImageElement,
-  (item) => {
-    popupDeleteConfirmation.openPopup();
-    popupDeleteConfirmation.setSubmitAction(() => {
-      api.deleteCard(item._id)
-      .then(() => {
-        cardElement.deleteCardElement();
-        popupDeleteConfirmation.closePopup();
+  const cardElement = new Card(
+    cardData,
+    '#element-template',
+    userId,
+    //Просмотр карточки
+    handlePhotoClick,
+    
+    //Удаление карточки с API
+    (item) => {
+      popupDeleteConfirmation.openPopup();
+      popupDeleteConfirmation.setSubmitAction(() => {
+        api.deleteCard(item._id)
+        .then(() => {
+          cardElement.deleteCard()
+          popupDeleteConfirmation.closePopup()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      })
+    },
+    
+    //Лайк для карточки c API
+    (cardElement) => {
+      api.likeSwitcher(cardData._id, cardElement.isLiked())
+      .then((res) => {
+        cardElement.updateLikes(res)
       })
       .catch((err) => {
-        console.log(err);
-      })
-    })
-  },
+        console.log(err)
+      });
+    }
+  )
 
-  (cardElement) => {
-    api.likeSwitcher(cardData._id, cardElement.isLiked())
-    .then((res) => {
-      cardElement.updateLikes(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-)
   return cardElement.createCard();
 }
 
 //Просмотр фото
-function viewImageElement(name, link) {
+function handlePhotoClick(name, link) {
   imagePopup.openPopup(name, link)
 }
 
@@ -85,7 +94,6 @@ const cardList = new Section((cards) => {
   },
   '.elements__items'
   );
-
 
 //Карточки и профиль с API
 Promise.all([api.getUserData(), api.getCards()])
@@ -104,7 +112,7 @@ Promise.all([api.getUserData(), api.getCards()])
 
 //Редактирование профиля с API
 const handleProfileFormSubmit = (data) => {
-  editUserPopup.renderLoading(true);
+  editUserPopup.renderLoading(true)
   api.setUserData(data.name, data.bio)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about);
@@ -114,13 +122,12 @@ const handleProfileFormSubmit = (data) => {
     console.log(err);
   })
   .finally(() => {
-    editUserPopup.renderLoading(false);
+    editUserPopup.renderLoading(false)
   });
 }
 
-//Лобавление карточки с API
+//Добавление карточки с API
 const handleCardFormSubmit = (data) => {
-
   addCardPopup.renderLoading(true)
   api.addCard({
     name: data['mesto-name'],
@@ -139,8 +146,7 @@ const handleCardFormSubmit = (data) => {
   });
 }
 
-
-//Submit обновления аватара
+//Обновление аватара с API
 const handleAvatarFormSubmit = (data) => {
   upAvatarPopup.renderLoading(true);
   api.updateAvatar(
@@ -194,7 +200,7 @@ btnEditUser.addEventListener('click', () => {
 
 //Открытие попапа обновления аватара
 btnUpAvatar.addEventListener('click', () => {
-  //upAvatarValidation.resetValidation()
+  upAvatarValidation.resetValidation()
   upAvatarPopup.openPopup();
 }); 
 
