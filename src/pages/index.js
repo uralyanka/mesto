@@ -6,18 +6,17 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 
 import { 
   formElementEdit,
-  initialElements,
   btnEditUser,
   nameUserInput,
   bioUserInput,
   btnAddElement,
   formElementAdd,
   btnUpAvatar,
-  popupUpAvatar,
   formElementAvatar
  } from '../utils/constants.js';
 
@@ -42,40 +41,62 @@ const api = new Api({
   }
 });
 
+let userId = null;
+
 //Создание карточки классом Card
 function createElement(cardData) {
-  const cardElement = new Card(cardData, '#element-template', () => {
-    imagePopup.openPopup(cardData.name, cardData.link)
-  });
+  const cardElement = new Card(cardData, '#element-template', userId, viewImageElement,
+  (item) => {
+    popupDeleteConfirmation.openPopup();
+    popupDeleteConfirmation.setSubmitAction(() => {
+      api.deleteCard(item._id)
+      .then(() => {
+        cardElement.deleteCardElement();
+        popupDeleteConfirmation.closePopup();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    })
+  },
+
+  (cardElement) => {
+    api.likeSwitcher(cardData._id, cardElement.isLiked())
+    .then((res) => {
+      cardElement.updateLikes(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+)
   return cardElement.createCard();
 }
 
+//Просмотр фото
+function viewImageElement(name, link) {
+  imagePopup.openPopup(name, link)
+}
+
 //Рендер карточек классом Section 
-const cardList = (cardsData) => {
-  const section = new Section(
-    {
-      items: cardsData,
-      renderer: (item) => {
-      const cardElement = createElement(item)
-      section.addItem(cardElement)
-      }
-    },
-      '.elements__items');
-      return section
-};
+const cardList = new Section((cards) => {
+  const cardElement = createElement(cards);
+  cardList.addItem(cardElement);
+  },
+  '.elements__items'
+  );
+
 
 //Карточки и профиль с API
 Promise.all([api.getUserData(), api.getCards()])
   .then(([userData, cardsData]) => {
+    userId = userData._id;
     userInfo.setUserInfo(
       userData.name,
       userData.about,
       userData.avatar
     );
-    return cardList(cardsData);
-  })
-  .then((card) => {
-    card.renderItems();
+    cardList.renderItems(cardsData);
   })
   .catch((err) => {
     console.log(err);
@@ -97,43 +118,17 @@ const handleProfileFormSubmit = (data) => {
   });
 }
 
-const cardD = new Section(
-  {
-  items: initialElements,
-  renderer: (item) => {
-    const cardElement = createElement(item)
-    cardList.addItem(cardElement)
-    }
-  },
-    '.elements__items'
-);
-
-
-/*//Submit добавления карточки
-const handleCardFormSubmit = (data) => {
-
-  const cardElement = createElement({
-    name: data['mesto-name'],
-    link: data['mesto-link']
-  })
-
-  cardD.addItem(cardElement)
-  addCardPopup.closePopup()
-} */
-
-//Submit добавления карточки
+//Лобавление карточки с API
 const handleCardFormSubmit = (data) => {
 
   addCardPopup.renderLoading(true)
-  api.addCard(data.name, data.link)
-  .then(res => {
-  const cardElement = createElement({
-    name: res.name,
-    link: res.link,
-    _id: res._id,
+  api.addCard({
+    name: data['mesto-name'],
+    link: data['mesto-link']
   })
-
-  cardD.addItem(cardElement)
+  .then((data) => {
+  const cardElement = createElement(data);
+  cardList.addItem(cardElement);
   addCardPopup.closePopup()
   })
   .catch((err) => {
@@ -144,10 +139,12 @@ const handleCardFormSubmit = (data) => {
   });
 }
 
+
 //Submit обновления аватара
 const handleAvatarFormSubmit = (data) => {
   upAvatarPopup.renderLoading(true);
-  api.updateAvatar(data['avatar-link'])
+  api.updateAvatar(
+    data['avatar-link'])
   .then(res => {
     userInfo.setAvatar(res.avatar);
     upAvatarPopup.closePopup();
@@ -161,6 +158,7 @@ const handleAvatarFormSubmit = (data) => {
 }
 
 const imagePopup = new PopupWithImage('.popup_type_view-mesto');
+const popupDeleteConfirmation = new PopupWithConfirmation('.popup_type_delete-card-confirm');
 
 const userInfo = new UserInfo({ 
   profileNameSelector: '.profile__user-name', 
@@ -176,6 +174,7 @@ imagePopup.setEventListeners();
 editUserPopup.setEventListeners();
 addCardPopup.setEventListeners();
 upAvatarPopup.setEventListeners();
+popupDeleteConfirmation.setEventListeners();
 
 //Открытие попапа редактирования профиля
 btnAddElement.addEventListener('click', () => {

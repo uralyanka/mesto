@@ -106,10 +106,15 @@
         </section>
 
         <section class="popup popup_type_delete-card-confirm"> 
-            <div class="popup__container">
+            <div class="popup__container popup__container_type_confirmation">
                 <button class="button popup__close-btn popup__close-btn_type_delete-card-confirm" type="button" aria-label="Закрыть всплывающее окно"></button>
                 <h2 class="popup__title">Вы уверены?</h2>
-                <button class="button popup__submit-btn popup__submit-btn_type_user-edit" type="submit" aria-label="Подтвердить удаление карточки">Да</button>
+
+                <form class="form" name="delete-card" novalidate>
+                    <input type="hidden" name="item-id" value="">
+                    <button class="button popup__submit-btn" type="submit" aria-label="Подтвердить удаление карточки">Да</button>
+                </form>
+                
             </div>
         </section>
 

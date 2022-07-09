@@ -39,36 +39,33 @@ export default class Api {
         }).then(res => this._checkRes(res));
     }
 
-    addCard(name, link) {
+    addCard({name, link}) {
         return fetch(this._cardsUrl, {
           method: 'POST',
           headers: this._headers,
-          body: JSON.stringify({
-            name,
-            link
-          })
+          body: JSON.stringify({name: name, link: link})
         }).then(res => this._checkRes(res));
     }
 
     deleteCard(cardId) {
-        return fetch(`${this._baseUrl/cardId}`, {
+        return fetch(`${this._baseUrl}/cards/${cardId}`, {
           method: 'DELETE',
           headers: this._headers,
         }).then(res => this._checkRes(res));
     }
 
-    addLike(cardId) {
-        return fetch(`${this._cardsUrl/cardId}/likes`, {
-          method: 'PUT',
-          headers: this._headers
-        }).then(res => this._checkRes(res));
-    }
-
-    deleteLike(cardId) {
-        return fetch(`${this._cardsUrl/cardId}/likes`, {
+    likeSwitcher(cardId, isLiked) {
+      if (isLiked) {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
           method: 'DELETE',
-          headers: this._headers
+          headers: this._headers,
         }).then(res => this._checkRes(res));
+      } else {
+        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+          method: 'PUT',
+          headers: this._headers,
+        }).then(res => this._checkRes(res));
+      }
     }
 
     updateAvatar(avatar) {
