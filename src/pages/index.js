@@ -84,7 +84,7 @@ function createElement(cardData) {
 
 //Просмотр фото
 function handlePhotoClick(name, link) {
-  imagePopup.openPopup(name, link)
+  popupViewImage.openPopup(name, link)
 }
 
 //Рендер карточек классом Section 
@@ -112,23 +112,23 @@ Promise.all([api.getUserData(), api.getCards()])
 
 //Редактирование профиля с API
 const handleProfileFormSubmit = (data) => {
-  editUserPopup.renderLoading(true)
+  popupEditUser.renderLoading(true)
   api.setUserData(data.name, data.bio)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about);
-      editUserPopup.closePopup();
+      popupEditUser.closePopup();
     })
   .catch((err) => {
     console.log(err);
   })
   .finally(() => {
-    editUserPopup.renderLoading(false)
+    popupEditUser.renderLoading(false)
   });
 }
 
 //Добавление карточки с API
 const handleCardFormSubmit = (data) => {
-  addCardPopup.renderLoading(true)
+  popupAddCard.renderLoading(true)
   api.addCard({
     name: data['mesto-name'],
     link: data['mesto-link']
@@ -136,34 +136,34 @@ const handleCardFormSubmit = (data) => {
   .then((data) => {
   const cardElement = createElement(data);
   cardList.addItem(cardElement);
-  addCardPopup.closePopup()
+  popupAddCard.closePopup()
   })
   .catch((err) => {
   console.log(err);
   })
   .finally(() => {
-  addCardPopup.renderLoading(false);
+  popupAddCard.renderLoading(false);
   });
 }
 
 //Обновление аватара с API
 const handleAvatarFormSubmit = (data) => {
-  upAvatarPopup.renderLoading(true);
+  popupUpAvatar.renderLoading(true);
   api.updateAvatar(
     data['avatar-link'])
   .then(res => {
     userInfo.setAvatar(res.avatar);
-    upAvatarPopup.closePopup();
+    popupUpAvatar.closePopup();
   })
   .catch((err) => {
     console.log(err);
   })
   .finally(() => {
-    upAvatarPopup.renderLoading(false);
+    popupUpAvatar.renderLoading(false);
   });
 }
 
-const imagePopup = new PopupWithImage('.popup_type_view-mesto');
+const popupViewImage = new PopupWithImage('.popup_type_view-mesto');
 const popupDeleteConfirmation = new PopupWithConfirmation('.popup_type_delete-card-confirm');
 
 const userInfo = new UserInfo({ 
@@ -172,20 +172,20 @@ const userInfo = new UserInfo({
   profileAvatarSelector: '.profile__avatar-image'
 });
 
-const editUserPopup = new PopupWithForm('.popup_type_user-edit', handleProfileFormSubmit)
-const addCardPopup = new PopupWithForm('.popup_type_add-mesto', handleCardFormSubmit)
-const upAvatarPopup = new PopupWithForm('.popup_type_update-avatar', handleAvatarFormSubmit)
+const popupEditUser = new PopupWithForm('.popup_type_user-edit', handleProfileFormSubmit)
+const popupAddCard = new PopupWithForm('.popup_type_add-mesto', handleCardFormSubmit)
+const popupUpAvatar = new PopupWithForm('.popup_type_update-avatar', handleAvatarFormSubmit)
 
-imagePopup.setEventListeners();
-editUserPopup.setEventListeners();
-addCardPopup.setEventListeners();
-upAvatarPopup.setEventListeners();
+popupViewImage.setEventListeners();
+popupEditUser.setEventListeners();
+popupAddCard.setEventListeners();
+popupUpAvatar.setEventListeners();
 popupDeleteConfirmation.setEventListeners();
 
 //Открытие попапа редактирования профиля
 btnAddElement.addEventListener('click', () => {
   newCardValidation.resetValidation()
-  addCardPopup.openPopup()
+  popupAddCard.openPopup()
 });
 
 //Открытие попапа добавления карточки
@@ -195,13 +195,13 @@ btnEditUser.addEventListener('click', () => {
   bioUserInput.value = bio
   
   profileValidation.resetValidation()
-  editUserPopup.openPopup()
+  popupEditUser.openPopup()
 });
 
 //Открытие попапа обновления аватара
 btnUpAvatar.addEventListener('click', () => {
   upAvatarValidation.resetValidation()
-  upAvatarPopup.openPopup();
+  popupUpAvatar.openPopup();
 }); 
 
 //Активация валидации

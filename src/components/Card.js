@@ -47,11 +47,7 @@ export default class Card {
   updateLikes(card) {
     this._likeCount.textContent = card.likes.length
     this._likes = card.likes
-    if (this.isLiked()) {
-      this._likeCard.classList.add('elements__like-btn_active')
-    } else {
-      this._likeCard.classList.remove('elements__like-btn_active')
-    }
+    this._likeCard.classList.toggle('elements__like-btn_active', this.isLiked())
   }
 
   _getTemplate() {
