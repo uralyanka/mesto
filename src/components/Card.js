@@ -36,7 +36,7 @@ export default class Card {
 
   _isOwnerCard() {
     if (this._ownerId !== this._userId) {
-        this._deleteCard.remove()
+      this._deleteCard.remove()
     }
   }
 
